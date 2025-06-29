@@ -43,6 +43,10 @@ function App() {
     window.location.href = "/";
   };
 
+  const handleBack = () => {
+    window.location.href = "/"
+  }
+
   return (
     <Suspense fallback={<p>Loading...</p>}>
       <>
@@ -63,15 +67,15 @@ function App() {
           />
           <Route
             path="/admin/login"
-            element={<AdminLogin onLogin={() => handleLogin("admin")} />}
+            element={<AdminLogin onLogin={() => handleLogin("admin")} onBackToSelector={handleBack} />}
           />
           <Route
             path="/proctor/login"
-            element={<ProctorLogin onLogin={() => handleLogin("proctor")} />}
+            element={<ProctorLogin onLogin={() => handleLogin("proctor")} onBack={handleBack} />}
           />
           <Route
             path="/student/login"
-            element={<StudentLogin onLogin={() => handleLogin("student")} />}
+            element={<StudentLogin onLogin={() => handleLogin("student")} onBack={handleBack} />}
           />
           <Route
             path="/dashboard"
