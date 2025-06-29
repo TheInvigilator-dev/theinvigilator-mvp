@@ -22,7 +22,7 @@ interface AdminDashboardProps {
   onLogout?: () => void;
 }
 
-const AdminDashboard = ({ onLogout = () => {} }: AdminDashboardProps) => {
+const AdminDashboard = ({ onLogout = () => { } }: AdminDashboardProps) => {
   const [activeView, setActiveView] = useState<
     "dashboard" | "monitoring" | "incidents" | "create-exam" | "reports"
   >("dashboard");

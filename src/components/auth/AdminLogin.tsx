@@ -11,14 +11,18 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, ArrowLeft } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface AdminLoginProps {
   onLogin?: (email: string, password: string) => void;
+  onBackToSelector?: () => void;
 }
 
-const AdminLogin = ({ onLogin = () => {} }: AdminLoginProps) => {
+const AdminLogin = ({
+  onLogin = () => { },
+  onBackToSelector = () => { },
+}: AdminLoginProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -36,9 +40,7 @@ const AdminLogin = ({ onLogin = () => {} }: AdminLoginProps) => {
 
     try {
       setIsLoading(true);
-      // In a real app, this would call an authentication service
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
-      // Accept any credentials for demo purposes
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       onLogin(email, password);
     } catch (err) {
       setError("Invalid credentials. Please try again.");
@@ -48,35 +50,35 @@ const AdminLogin = ({ onLogin = () => {} }: AdminLoginProps) => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-900 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-slate-900 p-4 text-white">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-600">
-            <span className="text-2xl font-bold text-white">AP</span>
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20">
+            <span className="text-2xl font-bold text-blue-400">AP</span>
           </div>
-          <h1 className="text-3xl font-bold text-white">AI Proctoring</h1>
+          <h1 className="text-4xl font-bold text-white">AI Proctoring</h1>
           <p className="mt-2 text-slate-400">Administrator Portal</p>
         </div>
 
-        <Card className="border-0 shadow-xl">
-          <CardHeader>
-            <CardTitle>Admin Login</CardTitle>
-            <CardDescription>
-              Enter your credentials to access the admin dashboard
+        <Card className="rounded-xl border-slate-700 bg-slate-800/50">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl text-white">Admin Login</CardTitle>
+            <CardDescription className="text-slate-400">
+              Enter your credentials to access the dashboard
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit}>
               {error && (
-                <Alert variant="destructive" className="mb-4">
-                  <AlertCircle className="h-4 w-4" />
+                <Alert variant="destructive" className="mb-4 bg-red-900/20 border-red-500/30 text-red-400">
+                  <AlertCircle className="h-4 w-4 text-red-400" />
                   <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
 
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-slate-300">Email</Label>
                   <Input
                     id="email"
                     type="email"
@@ -84,15 +86,16 @@ const AdminLogin = ({ onLogin = () => {} }: AdminLoginProps) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="border-slate-600 bg-slate-900/50 text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password" className="text-slate-300">Password</Label>
                     <a
                       href="#"
-                      className="text-sm text-blue-600 hover:text-blue-800"
+                      className="text-sm text-blue-400 hover:underline"
                     >
                       Forgot password?
                     </a>
@@ -103,6 +106,7 @@ const AdminLogin = ({ onLogin = () => {} }: AdminLoginProps) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="border-slate-600 bg-slate-900/50 text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
@@ -111,10 +115,11 @@ const AdminLogin = ({ onLogin = () => {} }: AdminLoginProps) => {
                     id="remember"
                     checked={rememberMe}
                     onCheckedChange={(checked) => setRememberMe(!!checked)}
+                    className="border-slate-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white"
                   />
                   <Label
                     htmlFor="remember"
-                    className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="text-sm font-normal text-slate-400"
                   >
                     Remember me
                   </Label>
@@ -123,23 +128,18 @@ const AdminLogin = ({ onLogin = () => {} }: AdminLoginProps) => {
 
               <Button
                 type="submit"
-                className="mt-6 w-full bg-blue-600 hover:bg-blue-700"
+                className="mt-6 w-full bg-blue-600 py-3 text-base font-semibold hover:bg-blue-700"
                 disabled={isLoading}
               >
                 {isLoading ? "Logging in..." : "Login"}
               </Button>
             </form>
           </CardContent>
-          <CardFooter className="flex justify-center border-t p-4">
-            <p className="text-center text-sm text-muted-foreground">
-              Need help?{" "}
-              <a
-                href="#"
-                className="text-blue-600 hover:text-blue-800 hover:underline"
-              >
-                Contact support
-              </a>
-            </p>
+          <CardFooter className="flex justify-center border-t border-slate-700 p-4">
+            <Button variant="link" onClick={onBackToSelector} className="text-sm text-slate-400 hover:text-white">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to role selection
+            </Button>
           </CardFooter>
         </Card>
       </div>
