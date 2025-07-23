@@ -20,7 +20,7 @@ const LoginSelector = ({ onSelectRole }: LoginSelectorProps) => {
   const roleCards = [
     {
       role: "admin" as const,
-      icon: <UserCog className="h-12 w-12" />,
+      icon: <UserCog className="h-12 w-12 text-blue-500" />,
       title: "Administrator",
       description: "Complete system control and management capabilities",
       features: ["Manage all users", "System configuration", "Analytics & reports"],
@@ -31,7 +31,7 @@ const LoginSelector = ({ onSelectRole }: LoginSelectorProps) => {
     },
     {
       role: "proctor" as const,
-      icon: <Monitor className="h-12 w-12" />,
+      icon: <Monitor className="h-12 w-12 text-indigo-500" />,
       title: "Proctor",
       description: "Real-time monitoring and incident response",
       features: ["Live exam monitoring", "AI-assisted detection", "Communication tools"],
@@ -42,7 +42,7 @@ const LoginSelector = ({ onSelectRole }: LoginSelectorProps) => {
     },
     {
       role: "student" as const,
-      icon: <BookOpen className="h-12 w-12" />,
+      icon: <BookOpen className="h-12 w-12 text-teal-500" />,
       title: "Student",
       description: "Secure examination environment with identity verification",
       features: ["Identity verification", "Secure exam taking", "Real-time support"],
