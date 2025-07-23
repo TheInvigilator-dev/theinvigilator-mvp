@@ -79,7 +79,7 @@ const LoginSelector = ({ onSelectRole }: LoginSelectorProps) => {
             </div>
 
             <h1 className="text-6xl font-black tracking-tight text-white sm:text-7xl mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
-              SecureProctor
+              The Invigilator
             </h1>
             <p className="text-2xl text-slate-300 font-light mb-4 max-w-3xl mx-auto leading-relaxed">
               Next-generation AI-powered exam monitoring platform
