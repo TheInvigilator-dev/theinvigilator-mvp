@@ -21,10 +21,10 @@ import {
 
 interface SystemCheckDialogProps {
   open: boolean;
-  onClose: () => void;
+  onOpenChange: (open: boolean) => void;
 }
 
-const SystemCheckDialog = ({ open, onClose }: SystemCheckDialogProps) => {
+const SystemCheckDialog = ({ open, onOpenChange }: SystemCheckDialogProps) => {
   const [activeTab, setActiveTab] = useState("camera");
   const [cameraStatus, setCameraStatus] = useState<
     "pending" | "success" | "error"
@@ -139,7 +139,7 @@ const SystemCheckDialog = ({ open, onClose }: SystemCheckDialogProps) => {
     setIsVerifying(false);
     setVerificationProgress(0);
     setVerificationComplete(false);
-    onClose();
+    onOpenChange(false);
   };
 
   return (

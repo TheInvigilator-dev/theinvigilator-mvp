@@ -9,6 +9,7 @@ import {
 import Home from "./components/home";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import StudentDashboard from "./components/student/StudentDashboard";
+import ProctorDashboard from "./components/proctor/ProctorDashboard";
 import ExamInProgress from "./components/student/ExamInProgress";
 import ExamComplete from "./components/student/ExamComplete";
 import {
@@ -32,8 +33,10 @@ function App() {
       window.location.href = "/admin/dashboard";
     } else if (role === "student") {
       window.location.href = "/student/dashboard";
+    } else if (role === "proctor") {
+      window.location.href = "/proctor/dashboard";
     } else {
-      window.location.href = "/dashboard";
+      window.location.href = "#"
     }
   };
 
@@ -78,10 +81,8 @@ function App() {
             element={<StudentLogin onLogin={() => handleLogin("student")} onBack={handleBack} />}
           />
           <Route
-            path="/dashboard"
-            element={
-              <Home userRole={userRole || "proctor"} onLogout={handleLogout} />
-            }
+            path="/proctor/dashboard"
+            element={<ProctorDashboard onLogout={handleLogout} />}
           />
           <Route
             path="/admin/dashboard"

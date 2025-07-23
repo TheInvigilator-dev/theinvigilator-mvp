@@ -22,15 +22,15 @@ import {
 
 interface ExamRulesDialogProps {
   open: boolean;
-  onClose: () => void;
+  onOpenChange: (open: boolean) => void;
 }
 
-const ExamRulesDialog = ({ open, onClose }: ExamRulesDialogProps) => {
+const ExamRulesDialog = ({ open, onOpenChange }: ExamRulesDialogProps) => {
   const [agreedToRules, setAgreedToRules] = React.useState(false);
 
   const handleClose = () => {
     setAgreedToRules(false);
-    onClose();
+    onOpenChange(false);
   };
 
   return (
